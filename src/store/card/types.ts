@@ -11,10 +11,18 @@ export interface CardsState {
     cards: Card[]
 }
 
-// -- Actions Interfaces -- //
+export interface ICardComponent {
+    card: Card,
+    deleteCard: Function
+}
+
+// -- Actions Types -- //
 
 export const GET_CARDS = "GET_CARDS";
 export const ADD_CARD = "ADD_CARD";
+export const DELETE_CARD = "DELETE_CARD";
+
+// -- Actions Interfaces -- //
 
 export interface GetCardsAction {
     type: typeof GET_CARDS
@@ -26,4 +34,9 @@ export interface AddCardAction {
     payload: Card
 }
 
-export type CardsActionTypes = GetCardsAction | AddCardAction;
+export interface DeleteCardAction {
+    type: typeof DELETE_CARD
+    payload: Card[]
+}
+
+export type CardsActionTypes = GetCardsAction | AddCardAction | DeleteCardAction;

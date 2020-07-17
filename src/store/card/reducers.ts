@@ -6,7 +6,8 @@ import {
     CardsActionTypes,
     GET_CARDS,
     Card,
-    ADD_CARD
+    ADD_CARD,
+    DELETE_CARD
 } from './types';
 
 const initialState: CardsState = {
@@ -45,9 +46,13 @@ export function cardsReducer (
                 cards: action.payload
             }
         case ADD_CARD:
+            const card = Object.assign({}, action.payload)
             return {
-                ...state,
-                ...action.payload
+                cards: [...state.cards, card]
+            }
+        case DELETE_CARD:
+            return {
+                cards: action.payload
             }
         default:
             return state
