@@ -13,8 +13,9 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { gql } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: 'https://48p1r2roz4.sse.codesandbox.io',
-  cache: new InMemoryCache()
+  uri: 'http://localhost:8089/v1/graphql', // 'https://48p1r2roz4.sse.codesandbox.io',
+  cache: new InMemoryCache(),
+  headers: {"x-hasura-admin-secret": "sojernadminsecret"}
 });
 
 // GraphQL query for testing purposes
@@ -22,9 +23,13 @@ const client = new ApolloClient({
 client
   .query({
     query: gql`
-      query GetRates {
-        rates(currency: "USD") {
-          currency
+      query GetAccounts {
+        accounts {
+          id
+          name
+          status
+          tier
+          region
         }
       }
     `

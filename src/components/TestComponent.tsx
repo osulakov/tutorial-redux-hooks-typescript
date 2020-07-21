@@ -2,16 +2,19 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 const EXCHANGE_RATES = gql`
-  query GetExchangeRates {
+  query GetRates {
     rates(currency: "USD") {
       currency
       rate
+      name
     }
   }
 `;
 
 export interface Rate {
-    currency: string
+    currency: string,
+    rate: string,
+    name: string
 }
 
 
@@ -23,10 +26,10 @@ const ExchangeRates = () => {
 
     const rates: Rate[] = data.rates;
   
-    const ratesList = rates.map(({ currency }) => (
+    const ratesList = rates.map(({ currency, rate, name }) => (
       <div key={currency}>
         <p>
-          {currency}: 
+          {currency}: {rate}, {name}
         </p>
       </div>
     ));
